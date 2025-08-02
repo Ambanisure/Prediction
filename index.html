@@ -1,469 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hack Sure Short</title>
-    <link rel="icon" href="logo.png" type="image/png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      /* Reset & base */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-        scroll-behavior: smooth;
-      }
-      body {
-        background: #f5f7fa;
-        color: #333;
-        line-height: 1.6;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      img {
-        max-width: 100%;
-        border-radius: 10px;
-        display: block;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hack Sure Short</title>
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    * { margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth; }
+    body { background:#f5f7fa;color:#333;line-height:1.6; }
+    a { text-decoration:none; color:inherit; }
+    img { max-width:100%; border-radius:10px; display:block; }
 
-      /* Navbar */
-      nav {
-        position: sticky;
-        top: 0;
-        background: #0d2538;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 3rem;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-      }
-      nav .logo img {
-        height: 40px;
-      }
-      nav ul {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-        transition: max-height 0.3s ease;
-      }
-      nav ul li a {
-        color: #e0e6e9;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: color 0.3s ease;
-        padding: 0.2rem 0.5rem;
-        border-radius: 4px;
-      }
-      nav ul li a:hover,
-      nav ul li a.active {
-        color: #00d9ff;
-        background: rgba(0, 217, 255, 0.15);
-      }
+    nav {
+      position: sticky; top:0;
+      background:#0d2538; display:flex; justify-content:space-between; align-items:center;
+      padding:1rem 2rem; box-shadow:0 2px 10px rgba(0,0,0,0.2); z-index:1000;
+    }
+    .logo img { height:40px; }
+    #nav-links { display:flex; gap:1.5rem; list-style:none; transition:max-height .3s ease; }
+    .nav-link { color:#e0e6e9; font-weight:600; padding:.2rem .5rem; border-radius:4px; }
+    .nav-link:hover, .nav-link.active { color:#00d9ff; background:rgba(0,217,255,0.15); }
 
-      .hamburger {
-        display: none;
-        flex-direction: column;
-        cursor: pointer;
-        gap: 5px;
-      }
-      .hamburger div {
-        width: 25px;
-        height: 3px;
-        background: #00d9ff;
-        border-radius: 2px;
-      }
-      .hamburger.active div:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-      }
-      .hamburger.active div:nth-child(2) {
-        opacity: 0;
-      }
-      .hamburger.active div:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-      }
+    .hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
+    .hamburger div { width:25px;height:3px;background:#00d9ff;border-radius:2px;transition:all .3s; }
+    .hamburger.active div:nth-child(1) { transform:translateY(8px) rotate(45deg); }
+    .hamburger.active div:nth-child(2) { opacity:0; }
+    .hamburger.active div:nth-child(3) { transform:translateY(-8px) rotate(-45deg); }
 
-      /* Hero Section */
-      .hero {
-        height: 100vh;
-        background: url("banner.png") no-repeat center center/cover;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: white;
-        padding: 0 1.5rem;
-        position: relative;
-      }
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(13, 37, 56, 0.6);
-        z-index: 0;
-      }
-      .hero h1 {
-        font-size: 3.5rem;
-        z-index: 1;
-        animation: fadeSlideInDown 1.5s forwards;
-      }
-      .hero .buttons {
-        display: flex;
-        gap: 1.5rem;
-        z-index: 1;
-        animation: fadeSlideInUp 1.5s 1s forwards;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .hero button {
-        padding: 0.8rem 2.5rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-        transition: 0.3s ease;
-      }
-      .hero button.explore {
-        background: #00d9ff;
-        color: #0d2538;
-      }
-      .hero button.register {
-        background: transparent;
-        border: 2px solid #00d9ff;
-        color: #00d9ff;
-      }
+    .hero {
+      min-height:100vh;
+      background:url('banner.png') no-repeat center/cover;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      text-align:center; color:white; position:relative; padding:0 1.5rem;
+    }
+    .hero::before {
+      content:""; position:absolute; inset:0;
+      background:rgba(13,37,56,0.6); z-index:0;
+    }
+    .hero h1 { font-size:3.5rem; z-index:1; animation:fadeSlideInDown .8s ease-in-out; }
+    .hero .buttons { display:flex; gap:1rem; z-index:1; animation:fadeSlideInUp .8s .5s ease-in-out both; flex-wrap:wrap; }
+    .hero button {
+      padding:.8rem 2.2rem; font-size:1.1rem; font-weight:600; border:none;border-radius:30px;
+      cursor:pointer; transition:background .3s;
+    }
+    .hero button.explore { background:#00d9ff; color:#0d2538; }
+    .hero button.explore:hover { background:#00c0e6; }
+    .hero button.register { background:transparent; border:2px solid #00d9ff; color:#00d9ff; }
+    .hero button.register:hover { background:#00d9ff; color:#0d2538; }
 
-      .section {
-        padding: 60px 20px;
-        background-color: #f9f9f9;
+    .section { padding:60px 20px; background:#f9f9f9; }
+    .section-title { text-align:center; font-size:2.2em; margin-bottom:40px; color:#333; }
+    .about-grid, .tips-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+      gap:30px;
+      max-width:1100px; margin:0 auto;
+    }
+    .about-card, .tip-card {
+      background:#fff; padding:25px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.05);
+      text-align:center; transition:transform .3s;
+    }
+    .about-card:hover, .tip-card:hover { transform:translateY(-5px); }
+    .about-card img, .tip-card img { width:60px; height:60px; margin-bottom:15px; }
+    .about-card h3, .tip-card h3 { font-size:1.2em; color:#333; margin-bottom:10px; }
+    .about-card p, .tip-card p { font-size:0.95em; color:#555; }
+
+    footer { background:#0d2538; color:#e0e6e9; text-align:center; padding:2rem 1rem; }
+
+    @media (max-width:768px) {
+      .hamburger { display:flex; }
+      #nav-links {
+        flex-direction:column; position:absolute; top:60px; right:0; background:#0d2538;
+        width:200px; max-height:0; overflow:hidden;
       }
+      #nav-links.open { max-height:300px; }
+      #nav-links li { margin:15px 0 0; text-align:right; margin-right:20px; }
+    }
 
-      .section-title {
-        text-align: center;
-        font-size: 2.2em;
-        margin-bottom: 40px;
-        color: #333;
+    @keyframes fadeSlideInDown {
+      from { opacity:0; transform:translateY(-40px); } to { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeSlideInUp {
+      from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><img src="logo.png" alt="logo">Hack Sure Short</div>
+  <ul id="nav-links">
+    <li><a href="#hero" class="nav-link active">Home</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#prediction" class="nav-link">Prediction Tips</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+</nav>
+
+<section class="hero" id="hero">
+  <h1>Hack Sure Short</h1>
+  <div class="buttons">
+    <button class="explore" onclick="window.open('https://t.me/+kLpkbXruDKc1ODZl','_blank')">Join Telegram</button>
+    <button class="register" onclick="window.open('https://www.tashanwin.net/#/register?invitationCode=83653111583','_blank')">Register to Play</button>
+  </div>
+</section>
+
+<section id="about" class="section about-section">
+  <h2 class="section-title">🎯 About Us</h2>
+  <div class="about-grid">
+    <div class="about-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/681/681611.png" alt="Mission">
+      <h3>Our Mission</h3>
+      <p>To make color prediction easy to understand through data, logic, and engaging tips.</p>
+    </div>
+    <div class="about-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/5690/5690566.png" alt="Insight">
+      <h3>Insightful Patterns</h3>
+      <p>Analyze patterns over time to make smarter, logic-based color predictions.</p>
+    </div>
+    <div class="about-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Real-time">
+      <h3>Real‑time Guidance</h3>
+      <p>Get tips instantly as trends shift for smarter decisions in fast rounds.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prediction" class="section">
+  <h2 class="section-title">🔮 Prediction Tips</h2>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Data">
+      <h3>Data‑Based Insights</h3>
+      <p>Use past outcomes to spot patterns and improve prediction accuracy.</p>
+    </div>
+    <div class="tip-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Trend">
+      <h3>Trend Analysis</h3>
+      <p>Identify which colors appear more often and which are rare.</p>
+    </div>
+    <div class="tip-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1006/1006555.png" alt="Logic">
+      <h3>Logical Approach</h3>
+      <p>Strategy and pattern recognition instead of guesswork.</p>
+    </div>
+    <div class="tip-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3523/3523885.png" alt="Timely">
+      <h3>Timely Suggestions</h3>
+      <p>Receive fresh insights before every round to stay ahead.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; Hack Sure Short | Designed for College Project</p>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  const navItems = document.querySelectorAll('.nav-link');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+
+  navItems.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('active');
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    let scrollPos = window.scrollY + 100;
+    navItems.forEach(link => {
+      const section = document.querySelector(link.getAttribute('href'));
+      if (section && section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+        navItems.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
       }
+    });
+  });
+</script>
 
-      .tips-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        max-width: 1100px;
-        margin: 0 auto;
-      }
-
-      .tip-card {
-        background: #fff;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        text-align: center;
-        transition: transform 0.3s ease;
-      }
-
-      .tip-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .tip-card img {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 15px;
-      }
-
-      .tip-card h3 {
-        font-size: 1.2em;
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      .tip-card p {
-        font-size: 0.95em;
-        color: #666;
-      }
-
-      .about-section {
-        background-color: #fff;
-      }
-
-      .about-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        max-width: 1100px;
-        margin: 0 auto;
-      }
-
-      .about-card {
-        background: #f1f1f1;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        text-align: center;
-        transition: transform 0.3s ease;
-      }
-
-      .about-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .about-card img {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 15px;
-      }
-
-      .about-card h3 {
-        font-size: 1.2em;
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      .about-card p {
-        font-size: 0.95em;
-        color: #555;
-      }
-
-      /* Sections */
-      section {
-        max-width: 1100px;
-        margin: 5rem auto;
-        padding: 0 1.5rem;
-      }
-      section h2 {
-        text-align: center;
-        margin-bottom: 2rem;
-        font-size: 2.5rem;
-      }
-      .content-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 2rem;
-      }
-      .content-text {
-        flex: 1;
-        min-width: 300px;
-      }
-
-      /* Footer */
-      footer {
-        background: #0d2538;
-        color: #e0e6e9;
-        text-align: center;
-        padding: 2rem 1rem;
-      }
-
-      /* Animations */
-      @keyframes fadeSlideInDown {
-        0% {
-          opacity: 0;
-          transform: translateY(-40px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes fadeSlideInUp {
-        0% {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        nav ul {
-          position: absolute;
-          top: 70px;
-          left: 0;
-          right: 0;
-          background: #0d2538;
-          flex-direction: column;
-          overflow: hidden;
-          max-height: 0;
-        }
-        nav ul.open {
-          max-height: 300px;
-        }
-        .hamburger {
-          display: flex;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav>
-      <div class="logo"><img src="logo.png" alt="logo" /></div>
-      <ul id="nav-links">
-        <li><a href="#hero" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#tips" class="nav-link">Prediction Tips</a></li>
-      </ul>
-      <div class="hamburger" id="hamburger">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </nav>
-
-    <section class="hero" id="hero">
-      <h1>Hack Sure Short</h1>
-      <div class="buttons">
-        <button
-          class="explore"
-          onclick="window.open('https://t.me/+kLpkbXruDKc1ODZl','_blank')"
-        >
-          Join Telegram
-        </button>
-        <button
-          class="register"
-          onclick="window.open('https://www.tashanwin.net/#/register?invitationCode=83653111583','_blank')"
-        >
-          Register to Play
-        </button>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about-section">
-      <div class="container">
-        <h2 class="section-title">🎯 About Us</h2>
-        <div class="about-grid">
-          <div class="about-card">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/681/681611.png"
-              alt="Our Mission Icon"
-            />
-            <h3> 📈 Our Mission</h3>
-            <p>
-              To make color prediction easy to understand through data, logic,
-              and engaging tips. We're here to help learners think smartly about
-              pattern-based games.
-            </p>
-          </div>
-          <div class="about-card">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/5690/5690566.png"
-              alt="Educational Purpose Icon"
-            />
-            <h3>: 🧠 Insightful Patterns</h3>
-            <p>
-              Color prediction is not just about chance—it is about observing
-              and understanding patterns over time. By analyzing how outcomes
-              unfold, users can recognize trends and make more informed
-              decisions.
-            </p>
-          </div>
-          <div class="about-card">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/833/833472.png"
-              alt="User Friendly Icon"
-            />
-            <h3>⚡ Real-time Guidance</h3>
-            <p>
-              In fast-paced prediction environments, every second counts. Our platform provides real-time tips and insights that help users make confident, well-timed decisions—without second-guessing.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Prediction Tips Section -->
-    <section id="prediction" class="section">
-      <div class="container">
-        <h2 class="section-title">🔮 Prediction Tips</h2>
-        <div class="tips-grid">
-          <div class="tip-card">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-              alt="Data Insight Icon"
-            />
-            <h3> 🔄 Data-Based Insights</h3>
-            <p>
-              Learn from past results to notice repeating patterns and improve
-              prediction accuracy.
-            </p>
-          </div>
-          <div class="tip-card">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
-              alt="Trend Analysis Icon"
-            />
-            <h3> 📊 Trend Analysis</h3>
-            <p>
-              Understand which colors are appearing more often and which ones
-              are rare.
-            </p>
-          </div>
-          <div class="tip-card">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/1006/1006555.png"
-              alt="Logical Approach Icon"
-            />
-            <h3> 🧩 Logical Approach</h3>
-            <p>
-              Use patterns and strategy, not just instinct, for better
-              decisions.
-            </p>
-          </div>
-          <div class="tip-card">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/3523/3523885.png"
-              alt="Timely Suggestions Icon"
-            />
-            <h3> ⏳ Timely Suggestions</h3>
-            <p>Stay updated with fresh tips for every round of the game.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <p>&copy; Hack Sure Short | Designed For Top Noch Prediction</p>
-      <p>Contact: Hack Sure Short TeleGram Channel</p>
-    </footer>
-
-    <script>
-      const hamburger = document.getElementById("hamburger");
-      const navLinks = document.getElementById("nav-links");
-      hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navLinks.classList.toggle("open");
-      });
-
-      const sections = document.querySelectorAll("section");
-      const navItems = document.querySelectorAll(".nav-link");
-
-      function activateNavLink() {
-        let scrollY = window.scrollY;
-        sections.forEach((section, i) => {
-          if (
-            scrollY >= section.offsetTop - 100 &&
-            scrollY < section.offsetTop + section.offsetHeight
-          ) {
-            navItems.forEach((link) => link.classList.remove("active"));
-            navItems[i].classList.add("active");
-          }
-        });
-      }
-
-      window.addEventListener("scroll", activateNavLink);
-    </script>
-  </body>
+</body>
 </html>
